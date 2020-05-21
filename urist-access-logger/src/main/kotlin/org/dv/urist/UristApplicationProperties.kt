@@ -1,6 +1,7 @@
 package org.dv.urist
 
 import org.dv.urist.UristFieldNames.QUERY_PARAM
+import org.dv.urist.UristFieldNames.REFERRER
 import org.dv.urist.UristFieldNames.REQUEST_URI
 import org.springframework.boot.context.properties.ConfigurationProperties
 import javax.validation.constraints.NotEmpty
@@ -15,6 +16,7 @@ data class UristApplicationProperties(
         val accessLogMessage: String = DEFAULT_ACCESS_LOG_MESSAGE,
         val privateFields: Set<String> = setOf(
                 REQUEST_URI,
-                QUERY_PARAM
+                QUERY_PARAM,
+                REFERRER
         )
 )
