@@ -1,5 +1,6 @@
 package org.dv.urist
 
+import org.dv.urist.UristFieldNames.QUERY_PARAM
 import org.dv.urist.UristFieldNames.REQUEST_URI
 import org.dv.urist.UristFieldNames.SERVICE_ID
 import org.dv.urist.UristFieldNames.STATUS
@@ -16,6 +17,10 @@ class UristSlf4j(
             value.toString().trim()
         }
         MDC.put(cleanKey, cleanValue)
+    }
+
+    fun withQueryParam(queryParam: String) {
+        withField(QUERY_PARAM, queryParam)
     }
 
     fun withRequestUri(requestUri: String) {

@@ -8,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.MDC
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
+import org.springframework.web.util.UriComponentsBuilder
 
 @ExtendWith(SoftAssertionsExtension::class)
 class AccessLoggerTest {
@@ -45,7 +46,12 @@ class AccessLoggerTest {
     softly.assertThat(MDC.getCopyOfContextMap())
         .isNull()
     val request = MockHttpServletRequest().also {
-      it.requestURI = "/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3"
+      val uri = UriComponentsBuilder.newInstance()
+          .path("/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3")
+          .queryParam("expand", "email")
+          .build()
+      it.requestURI = uri.path
+      it.queryString = uri.query
     }
     val response = MockHttpServletResponse().also {
       it.status = 200
@@ -57,6 +63,8 @@ class AccessLoggerTest {
         .isEqualTo(response.status.toString())
     softly.assertThat(MDC.get(UristFieldNames.REQUEST_URI))
         .isEqualTo(request.requestURI)
+    softly.assertThat(MDC.get(UristFieldNames.QUERY_PARAM))
+        .isEqualTo("expand=email")
   }
 
 }
