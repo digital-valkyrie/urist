@@ -15,11 +15,12 @@ class AccessLoggerTest {
   private val serviceId = "urist-service"
 
   private val uristApplicationProperties = UristApplicationProperties(
-      service = serviceId
+      service = serviceId,
+      privateFields = setOf()
   )
 
   private val accessLogger = AccessLogger(
-      uristSlf4j = UristSlf4j(),
+      uristSlf4j = UristSlf4j(uristApplicationProperties),
       uristApplicationProperties = uristApplicationProperties
   )
 
