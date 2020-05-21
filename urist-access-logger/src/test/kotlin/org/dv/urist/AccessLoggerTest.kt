@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.MDC
+import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 
 @ExtendWith(SoftAssertionsExtension::class)
@@ -39,13 +40,19 @@ class AccessLoggerTest {
   fun `When after request, then Urist should read request parameters and add them to the MDC`(softly: SoftAssertions) {
     softly.assertThat(MDC.getCopyOfContextMap())
         .isNull()
-    val response = MockHttpServletResponse()
-    response.status = 200
+    val request = MockHttpServletRequest().also {
+      it.requestURI = "/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3"
+    }
+    val response = MockHttpServletResponse().also {
+      it.status = 200
+    }
 
-    accessLogger.after(response)
+    accessLogger.after(request, response)
 
     softly.assertThat(MDC.get(UristFieldNames.STATUS))
         .isEqualTo(response.status.toString())
+    softly.assertThat(MDC.get(UristFieldNames.REQUEST_URI))
+        .isEqualTo(request.requestURI)
   }
 
 }
