@@ -9,4 +9,5 @@ object UristFieldNames {
     const val REQUEST_URI = "uriPath"
     const val QUERY_PARAM = "queryParam"
     const val REFERRER = "referrer"
+    const val USER_AGENT = "userAgent"
 }

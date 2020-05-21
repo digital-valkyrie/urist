@@ -3,6 +3,7 @@ package org.dv.urist
 import org.dv.urist.UristFieldNames.QUERY_PARAM
 import org.dv.urist.UristFieldNames.REFERRER
 import org.dv.urist.UristFieldNames.REQUEST_URI
+import org.dv.urist.UristFieldNames.USER_AGENT
 import org.springframework.boot.context.properties.ConfigurationProperties
 import javax.validation.constraints.NotEmpty
 
@@ -17,6 +18,7 @@ data class UristApplicationProperties(
         val privateFields: Set<String> = setOf(
                 REQUEST_URI,
                 QUERY_PARAM,
-                REFERRER
+                REFERRER,
+                USER_AGENT
         )
 )
