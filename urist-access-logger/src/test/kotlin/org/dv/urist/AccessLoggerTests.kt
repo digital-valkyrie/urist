@@ -77,4 +77,26 @@ class AccessLoggerTests {
                 .isEqualTo(userAgent)
     }
 
+    @Test
+    fun `Given some blank data, when after request, then Urist should not explode handling nullsC`(softly: SoftAssertions) {
+        softly.assertThat(MDC.getCopyOfContextMap())
+                .isNull()
+        val request = MockHttpServletRequest().also {
+            val uri = UriComponentsBuilder.newInstance()
+                    .path("/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3")
+                    .build()
+            it.requestURI = uri.path
+        }
+        val response = MockHttpServletResponse().also {
+            it.status = 200
+        }
+
+        accessLogger.after(request, response)
+
+        softly.assertThat(MDC.get(UristFieldNames.STATUS))
+                .isEqualTo(response.status.toString())
+        softly.assertThat(MDC.get(UristFieldNames.REQUEST_URI))
+                .isEqualTo(request.requestURI)
+    }
+
 }
