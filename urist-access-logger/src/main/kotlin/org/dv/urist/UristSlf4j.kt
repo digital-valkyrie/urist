@@ -5,6 +5,7 @@ import org.dv.urist.UristFieldNames.REFERRER
 import org.dv.urist.UristFieldNames.REQUEST_URI
 import org.dv.urist.UristFieldNames.SERVICE_ID
 import org.dv.urist.UristFieldNames.STATUS
+import org.dv.urist.UristFieldNames.USER_AGENT
 import org.slf4j.MDC
 
 class UristSlf4j(
@@ -38,5 +39,9 @@ class UristSlf4j(
 
     fun withStatus(status: Int) {
         withField(STATUS, status)
+    }
+
+    fun withUserAgent(userAgent: String) {
+        withField(USER_AGENT, userAgent)
     }
 }
