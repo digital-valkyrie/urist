@@ -18,6 +18,7 @@ class AccessLogger(
         uristSlf4j.withStatus(response.status)
 
         uristSlf4j.withRequestUri(request.requestURI)
+        uristSlf4j.withQueryParam(request.queryString)
 
         if (uristApplicationProperties.accessLoggingEnabled) {
             log.info(uristApplicationProperties.accessLogMessage)
