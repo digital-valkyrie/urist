@@ -5,18 +5,19 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class AccessLogger(
-        private val uristApplicationProperties: UristApplicationProperties
+        private val uristApplicationProperties: UristApplicationProperties,
+        private val uristSlf4j: UristSlf4j
 ) {
     private val log = LoggerFactory.getLogger(AccessLogger::class.java)
 
     fun before() {
-        UristSlf4j.withService(uristApplicationProperties.service)
+        uristSlf4j.withService(uristApplicationProperties.service)
     }
 
     fun after(request: HttpServletRequest, response: HttpServletResponse) {
-        UristSlf4j.withStatus(response.status)
+        uristSlf4j.withStatus(response.status)
 
-        UristSlf4j.withRequestUri(request.requestURI)
+        uristSlf4j.withRequestUri(request.requestURI)
 
         if (uristApplicationProperties.accessLoggingEnabled) {
             log.info(uristApplicationProperties.accessLogMessage)

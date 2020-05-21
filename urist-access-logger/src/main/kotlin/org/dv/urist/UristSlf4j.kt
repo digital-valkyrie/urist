@@ -5,7 +5,7 @@ import org.dv.urist.UristFieldNames.SERVICE_ID
 import org.dv.urist.UristFieldNames.STATUS
 import org.slf4j.MDC
 
-object UristSlf4j {
+class UristSlf4j() {
     fun withField(key: String, value: Any) {
         MDC.put(key, value.toString())
     }
