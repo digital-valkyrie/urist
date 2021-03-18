@@ -40,7 +40,7 @@
     
     <java.version>11</java.version>
     <kotlin.version>1.4.31</kotlin.version>
-    <spring-boot.version>2.2.7.RELEASE</spring-boot.version>
+    <spring-boot.version>2.4.3</spring-boot.version>
 
     <maven-surefire.version>2.22.2</maven-surefire.version>
   </properties>
