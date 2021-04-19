@@ -18,6 +18,7 @@
 
   <name>Urist Access Logger Parent</name>
   <description>The parent pom for Urist</description>
+  <url>https://github.com/digital-valkyrie/urist</url>
 
   <modules>
     <module>urist-access-logger</module>
