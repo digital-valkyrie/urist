@@ -15,7 +15,9 @@ class AccessLogger(
     fun after(response: HttpServletResponse) {
         UristSlf4j.withStatus(response.status)
 
-        log.info(uristApplicationProperties.accessLogMessage)
+        if (uristApplicationProperties.accessLoggingEnabled) {
+            log.info(uristApplicationProperties.accessLogMessage)
+        }
     }
 }
 
