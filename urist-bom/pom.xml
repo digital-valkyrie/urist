@@ -17,7 +17,7 @@
       <dependency>
         <groupId>org.dv.urist</groupId>
         <artifactId>urist-access-logger</artifactId>
-        <version>${project.version</version>
+        <version>${project.version}</version>
       </dependency>
     </dependencies>
   </dependencyManagement>
