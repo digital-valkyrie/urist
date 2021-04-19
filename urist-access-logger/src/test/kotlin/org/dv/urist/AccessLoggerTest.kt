@@ -14,10 +14,13 @@ class AccessLoggerTest {
 
   private val serviceId = "urist-service"
 
+  private val uristApplicationProperties = UristApplicationProperties(
+      service = serviceId
+  )
+
   private val accessLogger = AccessLogger(
-      uristApplicationProperties = UristApplicationProperties(
-          service = serviceId
-      )
+      uristSlf4j = UristSlf4j(),
+      uristApplicationProperties = uristApplicationProperties
   )
 
   @AfterEach
