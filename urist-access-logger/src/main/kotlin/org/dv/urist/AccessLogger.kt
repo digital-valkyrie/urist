@@ -1,16 +1,11 @@
 package org.dv.urist
 
-import org.slf4j.MDC
+import org.dv.urist.UristFieldNames.TEST
 
 class AccessLogger {
 
     fun before() {
-        UristSlf4j.withField("test", "foo")
+        UristSlf4j.withField(TEST, "foo")
     }
 }
 
-object UristSlf4j {
-    fun withField(key: String, value: String) {
-        MDC.put(key, value)
-    }
-}
