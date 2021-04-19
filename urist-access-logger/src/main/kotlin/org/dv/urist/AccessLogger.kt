@@ -2,6 +2,7 @@ package org.dv.urist
 
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpHeaders.REFERER
+import org.springframework.http.HttpHeaders.USER_AGENT
 import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
@@ -21,6 +22,7 @@ class AccessLogger(
         uristSlf4j.withRequestUri(request.requestURI)
         uristSlf4j.withQueryParam(request.queryString)
         uristSlf4j.withReferrer(request.getHeader(REFERER))
+        uristSlf4j.withUserAgent(request.getHeader(USER_AGENT))
 
         if (uristApplicationProperties.accessLoggingEnabled) {
             log.info(uristApplicationProperties.accessLogMessage)
