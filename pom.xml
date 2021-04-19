@@ -24,6 +24,8 @@
   </modules>
 
   <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    
     <java.version>11</java.version>
     <kotlin.version>1.3.72</kotlin.version>
     <maven-surefire.version>2.22.2</maven-surefire.version>
