@@ -20,6 +20,14 @@
   <description>The parent pom for Urist</description>
   <url>https://github.com/digital-valkyrie/urist</url>
 
+  <licenses>
+    <license>
+      <name>Apache License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
   <modules>
     <module>urist-access-logger</module>
   </modules>
