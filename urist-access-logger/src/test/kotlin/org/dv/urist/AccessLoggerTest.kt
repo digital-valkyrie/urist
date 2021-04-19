@@ -6,6 +6,7 @@ import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.MDC
+import org.springframework.http.HttpHeaders.REFERER
 import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.web.util.UriComponentsBuilder
@@ -45,6 +46,7 @@ class AccessLoggerTest {
   fun `When after request, then Urist should read request parameters and add them to the MDC`(softly: SoftAssertions) {
     softly.assertThat(MDC.getCopyOfContextMap())
         .isNull()
+        val referrer = "http://www.w3.org/hypertext/DataSources/Overview.html"
     val request = MockHttpServletRequest().also {
       val uri = UriComponentsBuilder.newInstance()
           .path("/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3")
@@ -52,6 +54,7 @@ class AccessLoggerTest {
           .build()
       it.requestURI = uri.path
       it.queryString = uri.query
+            it.addHeader(REFERER, referrer)
     }
     val response = MockHttpServletResponse().also {
       it.status = 200
@@ -65,6 +68,8 @@ class AccessLoggerTest {
         .isEqualTo(request.requestURI)
     softly.assertThat(MDC.get(UristFieldNames.QUERY_PARAM))
         .isEqualTo("expand=email")
+        softly.assertThat(MDC.get(UristFieldNames.REFERRER))
+                .isEqualTo(referrer)
   }
 
 }

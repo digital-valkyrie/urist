@@ -1,6 +1,7 @@
 package org.dv.urist
 
 import org.dv.urist.UristFieldNames.QUERY_PARAM
+import org.dv.urist.UristFieldNames.REFERRER
 import org.dv.urist.UristFieldNames.REQUEST_URI
 import org.dv.urist.UristFieldNames.SERVICE_ID
 import org.dv.urist.UristFieldNames.STATUS
@@ -21,6 +22,10 @@ class UristSlf4j(
 
     fun withQueryParam(queryParam: String) {
         withField(QUERY_PARAM, queryParam)
+    }
+
+    fun withReferrer(referrer: String) {
+        withField(REFERRER, referrer)
     }
 
     fun withRequestUri(requestUri: String) {
