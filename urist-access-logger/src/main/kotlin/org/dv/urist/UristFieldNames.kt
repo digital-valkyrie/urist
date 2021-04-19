@@ -7,4 +7,5 @@ object UristFieldNames {
 
     // Potentially private data
     const val REQUEST_URI = "uriPath"
+    const val QUERY_PARAM = "queryParam"
 }
