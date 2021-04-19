@@ -28,6 +28,11 @@
     </license>
   </licenses>
 
+  <scm>
+    <url>https://github.com/digital-valkyrie/urist</url>
+    <connection>scm:git:https://github.com/digital-valkyrie/urist.git</connection>
+  </scm>
+
   <modules>
     <module>urist-access-logger</module>
   </modules>
