@@ -9,15 +9,23 @@ import org.slf4j.MDC
 @ExtendWith(SoftAssertionsExtension::class)
 class AccessLoggerTest {
 
+  private val serviceId = "urist-service"
+
+  private val accessLogger = AccessLogger(
+      uristApplicationProperties = UristApplicationProperties(
+          service = serviceId
+      )
+  )
+
   @Test
   fun testsDummyValue(softly: SoftAssertions) {
     softly.assertThat(MDC.get(UristFieldNames.SERVICE_ID))
         .isNull()
 
-    AccessLogger().before()
+    accessLogger.before()
 
     softly.assertThat(MDC.get(UristFieldNames.SERVICE_ID))
-        .isEqualTo("a-microservice")
+        .isEqualTo(serviceId)
   }
 
 }

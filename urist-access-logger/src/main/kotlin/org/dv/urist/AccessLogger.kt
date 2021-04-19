@@ -1,9 +1,11 @@
 package org.dv.urist
 
-class AccessLogger {
+class AccessLogger(
+        private val uristApplicationProperties: UristApplicationProperties
+) {
 
     fun before() {
-        UristSlf4j.withService("a-microservice")
+        UristSlf4j.withService(uristApplicationProperties.service)
     }
 }
 
