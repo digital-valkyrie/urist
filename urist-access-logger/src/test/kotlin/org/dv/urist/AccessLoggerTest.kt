@@ -11,13 +11,13 @@ class AccessLoggerTest {
 
   @Test
   fun testsDummyValue(softly: SoftAssertions) {
-    softly.assertThat(MDC.get(UristFieldNames.TEST))
+    softly.assertThat(MDC.get(UristFieldNames.SERVICE_ID))
         .isNull()
 
     AccessLogger().before()
 
-    softly.assertThat(MDC.get(UristFieldNames.TEST))
-        .isEqualTo("foo")
+    softly.assertThat(MDC.get(UristFieldNames.SERVICE_ID))
+        .isEqualTo("a-microservice")
   }
 
 }
