@@ -43,6 +43,7 @@
     <spring-boot.version>2.4.5</spring-boot.version>
 
     <maven-surefire.version>2.22.2</maven-surefire.version>
+    <maven-failsafe.version>2.22.1</maven-failsafe.version>
   </properties>
 
   <dependencyManagement>
@@ -119,7 +120,7 @@
 
       <plugin>
         <artifactId>maven-failsafe-plugin</artifactId>
-        <version>${maven-surefire.version}</version>
+        <version>${maven-failsafe.version}</version>
       </plugin>
     </plugins>
   </build>
