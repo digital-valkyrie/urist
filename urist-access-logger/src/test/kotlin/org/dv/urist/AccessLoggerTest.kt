@@ -15,66 +15,66 @@ import org.springframework.web.util.UriComponentsBuilder
 @ExtendWith(SoftAssertionsExtension::class)
 class AccessLoggerTest {
 
-  private val serviceId = "urist-service"
+    private val serviceId = "urist-service"
 
-  private val uristApplicationProperties = UristApplicationProperties(
-      service = serviceId,
-      privateFields = setOf()
-  )
+    private val uristApplicationProperties = UristApplicationProperties(
+        service = serviceId,
+        privateFields = setOf()
+    )
 
-  private val accessLogger = AccessLogger(
-      uristSlf4j = UristSlf4j(uristApplicationProperties),
-      uristApplicationProperties = uristApplicationProperties
-  )
+    private val accessLogger = AccessLogger(
+        uristSlf4j = UristSlf4j(uristApplicationProperties),
+        uristApplicationProperties = uristApplicationProperties
+    )
 
-  @AfterEach
-  fun tearDown() {
-    MDC.clear()
-  }
-
-  @Test
-  fun `When before request, then Urist should add useful parameters to the MDC`(softly: SoftAssertions) {
-    softly.assertThat(MDC.getCopyOfContextMap())
-        .isNull()
-
-    accessLogger.before()
-
-    softly.assertThat(MDC.get(UristFieldNames.SERVICE_ID))
-        .isEqualTo(serviceId)
-  }
-
-  @Test
-  fun `When after request, then Urist should read request parameters and add them to the MDC`(softly: SoftAssertions) {
-    softly.assertThat(MDC.getCopyOfContextMap())
-        .isNull()
-    val referrer = "http://www.w3.org/hypertext/DataSources/Overview.html"
-    val userAgent = "Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion"
-    val request = MockHttpServletRequest().also {
-      val uri = UriComponentsBuilder.newInstance()
-          .path("/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3")
-          .queryParam("expand", "email")
-          .build()
-      it.requestURI = uri.path
-      it.queryString = uri.query
-      it.addHeader(REFERER, referrer)
-      it.addHeader(USER_AGENT, userAgent)
-    }
-    val response = MockHttpServletResponse().also {
-      it.status = 200
+    @AfterEach
+    fun tearDown() {
+        MDC.clear()
     }
 
-    accessLogger.after(request, response)
+    @Test
+    fun `When before request, then Urist should add useful parameters to the MDC`(softly: SoftAssertions) {
+        softly.assertThat(MDC.getCopyOfContextMap())
+            .isNull()
 
-    softly.assertThat(MDC.get(UristFieldNames.STATUS))
-        .isEqualTo(response.status.toString())
-    softly.assertThat(MDC.get(UristFieldNames.REQUEST_URI))
-        .isEqualTo(request.requestURI)
-    softly.assertThat(MDC.get(UristFieldNames.QUERY_PARAM))
-        .isEqualTo("expand=email")
-    softly.assertThat(MDC.get(UristFieldNames.REFERRER))
-        .isEqualTo(referrer)
-    softly.assertThat(MDC.get(UristFieldNames.USER_AGENT))
-        .isEqualTo(userAgent)
-  }
+        accessLogger.before()
+
+        softly.assertThat(MDC.get(UristFieldNames.SERVICE_ID))
+            .isEqualTo(serviceId)
+    }
+
+    @Test
+    fun `When after request, then Urist should read request parameters and add them to the MDC`(softly: SoftAssertions) {
+        softly.assertThat(MDC.getCopyOfContextMap())
+            .isNull()
+        val referrer = "http://www.w3.org/hypertext/DataSources/Overview.html"
+        val userAgent = "Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion"
+        val request = MockHttpServletRequest().also {
+            val uri = UriComponentsBuilder.newInstance()
+                .path("/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3")
+                .queryParam("expand", "email")
+                .build()
+            it.requestURI = uri.path
+            it.queryString = uri.query
+            it.addHeader(REFERER, referrer)
+            it.addHeader(USER_AGENT, userAgent)
+        }
+        val response = MockHttpServletResponse().also {
+            it.status = 200
+        }
+
+        accessLogger.after(request, response)
+
+        softly.assertThat(MDC.get(UristFieldNames.STATUS))
+            .isEqualTo(response.status.toString())
+        softly.assertThat(MDC.get(UristFieldNames.REQUEST_URI))
+            .isEqualTo(request.requestURI)
+        softly.assertThat(MDC.get(UristFieldNames.QUERY_PARAM))
+            .isEqualTo("expand=email")
+        softly.assertThat(MDC.get(UristFieldNames.REFERRER))
+            .isEqualTo(referrer)
+        softly.assertThat(MDC.get(UristFieldNames.USER_AGENT))
+            .isEqualTo(userAgent)
+    }
 
 }

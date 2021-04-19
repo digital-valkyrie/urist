@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class AccessLogger(
-        private val uristApplicationProperties: UristApplicationProperties,
-        private val uristSlf4j: UristSlf4j
+    private val uristApplicationProperties: UristApplicationProperties,
+    private val uristSlf4j: UristSlf4j
 ) {
     private val log = LoggerFactory.getLogger(AccessLogger::class.java)
 
