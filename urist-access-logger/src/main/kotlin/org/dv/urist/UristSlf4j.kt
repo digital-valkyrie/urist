@@ -1,5 +1,6 @@
 package org.dv.urist
 
+import org.dv.urist.UristFieldNames.REQUEST_URI
 import org.dv.urist.UristFieldNames.SERVICE_ID
 import org.dv.urist.UristFieldNames.STATUS
 import org.slf4j.MDC
@@ -15,5 +16,9 @@ object UristSlf4j {
 
     fun withStatus(status: Int) {
         withField(STATUS, status)
+    }
+
+    fun withRequestUri(requestUri: String) {
+        withField(REQUEST_URI, requestUri)
     }
 }

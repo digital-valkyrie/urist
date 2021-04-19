@@ -4,4 +4,7 @@ object UristFieldNames {
     const val STATUS = "status"
 
     const val SERVICE_ID = "serviceId"
+
+    // Potentially private data
+    const val REQUEST_URI = "uriPath"
 }

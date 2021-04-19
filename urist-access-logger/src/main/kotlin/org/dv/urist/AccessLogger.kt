@@ -1,6 +1,7 @@
 package org.dv.urist
 
 import org.slf4j.LoggerFactory
+import javax.servlet.http.HttpServletRequest
 import javax.servlet.http.HttpServletResponse
 
 class AccessLogger(
@@ -12,8 +13,10 @@ class AccessLogger(
         UristSlf4j.withService(uristApplicationProperties.service)
     }
 
-    fun after(response: HttpServletResponse) {
+    fun after(request: HttpServletRequest, response: HttpServletResponse) {
         UristSlf4j.withStatus(response.status)
+
+        UristSlf4j.withRequestUri(request.requestURI)
 
         if (uristApplicationProperties.accessLoggingEnabled) {
             log.info(uristApplicationProperties.accessLogMessage)
