@@ -12,7 +12,7 @@ import org.slf4j.MDC
 const val NO_VALUE_GIVEN = "-"
 
 class UristSlf4j(
-    private val uristApplicationProperties: UristApplicationProperties
+        private val uristApplicationProperties: UristApplicationProperties
 ) {
     private val log = LoggerFactory.getLogger(UristSlf4j::class.java)
 
