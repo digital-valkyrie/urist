@@ -24,7 +24,7 @@
 
         <dependency>
             <groupId>org.dv.urist</groupId>
-            <artifactId>urist-access-logger</artifactId>
+            <artifactId>urist-spring</artifactId>
         </dependency>
     </dependencies>
 
