@@ -18,6 +18,11 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.jetbrains.kotlin</groupId>
+            <artifactId>kotlin-reflect</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.dv.urist</groupId>
             <artifactId>urist-access-logger</artifactId>
         </dependency>
