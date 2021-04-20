@@ -35,6 +35,8 @@
         <module>urist-access-logger</module>
     </modules>
 
+    <module>urist-examples</module>
+
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
