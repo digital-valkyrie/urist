@@ -10,6 +10,10 @@ class SpringAccessLoggingFilter(private val accessLogger: AccessLogger) : OncePe
     override fun doFilterInternal(request: HttpServletRequest,
                                   response: HttpServletResponse,
                                   filterChain: FilterChain) {
-    }
+        accessLogger.before()
 
+        filterChain.doFilter(request, response)
+
+        accessLogger.after(request, response)
+    }
 }
