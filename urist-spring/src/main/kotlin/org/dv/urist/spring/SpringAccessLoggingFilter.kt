@@ -12,8 +12,10 @@ class SpringAccessLoggingFilter(private val accessLogger: AccessLogger) : OncePe
                                   filterChain: FilterChain) {
         accessLogger.before()
 
-        filterChain.doFilter(request, response)
-
-        accessLogger.after(request, response)
+        try {
+            filterChain.doFilter(request, response)
+        } finally {
+            accessLogger.after(request, response)
+        }
     }
 }
