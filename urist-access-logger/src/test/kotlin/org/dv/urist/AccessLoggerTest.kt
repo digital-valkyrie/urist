@@ -1,10 +1,11 @@
 package org.dv.urist
 
-import org.assertj.core.api.SoftAssertions
-import org.assertj.core.api.junit.jupiter.SoftAssertionsExtension
+import assertk.assertAll
+import assertk.assertThat
+import assertk.assertions.isEqualTo
+import assertk.assertions.isNull
 import org.junit.jupiter.api.AfterEach
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.extension.ExtendWith
 import org.slf4j.MDC
 import org.springframework.http.HttpHeaders.REFERER
 import org.springframework.http.HttpHeaders.USER_AGENT
@@ -12,7 +13,6 @@ import org.springframework.mock.web.MockHttpServletRequest
 import org.springframework.mock.web.MockHttpServletResponse
 import org.springframework.web.util.UriComponentsBuilder
 
-@ExtendWith(SoftAssertionsExtension::class)
 class AccessLoggerTest {
 
     private val serviceId = "urist-service"
@@ -33,20 +33,17 @@ class AccessLoggerTest {
     }
 
     @Test
-    fun `When before request, then Urist should add useful parameters to the MDC`(softly: SoftAssertions) {
-        softly.assertThat(MDC.getCopyOfContextMap())
-                .isNull()
+    fun `When before request, then Urist should add useful parameters to the MDC`() {
+        assertThat(MDC.getCopyOfContextMap()).isNull()
 
         accessLogger.before()
 
-        softly.assertThat(MDC.get(UristFieldNames.SERVICE_ID))
-                .isEqualTo(serviceId)
+        assertThat(MDC.get(UristFieldNames.SERVICE_ID)).isEqualTo(serviceId)
     }
 
     @Test
-    fun `When after request, then Urist should read request parameters and add them to the MDC`(softly: SoftAssertions) {
-        softly.assertThat(MDC.getCopyOfContextMap())
-                .isNull()
+    fun `When after request, then Urist should read request parameters and add them to the MDC`() {
+        assertThat(MDC.getCopyOfContextMap()).isNull()
         val referrer = "http://www.w3.org/hypertext/DataSources/Overview.html"
         val userAgent = "Mozilla/5.0 (platform; rv:geckoversion) Gecko/geckotrail Firefox/firefoxversion"
         val request = MockHttpServletRequest().also {
@@ -65,22 +62,17 @@ class AccessLoggerTest {
 
         accessLogger.after(request, response)
 
-        softly.assertThat(MDC.get(UristFieldNames.STATUS))
-                .isEqualTo(response.status.toString())
-        softly.assertThat(MDC.get(UristFieldNames.REQUEST_URI))
-                .isEqualTo(request.requestURI)
-        softly.assertThat(MDC.get(UristFieldNames.QUERY_PARAM))
-                .isEqualTo("expand=email")
-        softly.assertThat(MDC.get(UristFieldNames.REFERRER))
-                .isEqualTo(referrer)
-        softly.assertThat(MDC.get(UristFieldNames.USER_AGENT))
-                .isEqualTo(userAgent)
+        assertAll {
+            assertThat(MDC.get(UristFieldNames.STATUS)).isEqualTo(response.status.toString())
+            assertThat(MDC.get(UristFieldNames.REQUEST_URI)).isEqualTo(request.requestURI)
+            assertThat(MDC.get(UristFieldNames.QUERY_PARAM)).isEqualTo("expand=email")
+            assertThat(MDC.get(UristFieldNames.USER_AGENT)).isEqualTo(userAgent)
+        }
     }
 
     @Test
-    fun `Given some blank data, when after request, then Urist should not explode handling nullsC`(softly: SoftAssertions) {
-        softly.assertThat(MDC.getCopyOfContextMap())
-                .isNull()
+    fun `Given some blank data, when after request, then Urist should not explode handling nullsC`() {
+        assertThat(MDC.getCopyOfContextMap()).isNull()
         val request = MockHttpServletRequest().also {
             val uri = UriComponentsBuilder.newInstance()
                     .path("/api/orders/3e2a36b7-57cf-40d7-b28e-c942ee0d03c3")
@@ -93,10 +85,10 @@ class AccessLoggerTest {
 
         accessLogger.after(request, response)
 
-        softly.assertThat(MDC.get(UristFieldNames.STATUS))
-                .isEqualTo(response.status.toString())
-        softly.assertThat(MDC.get(UristFieldNames.REQUEST_URI))
-                .isEqualTo(request.requestURI)
+        assertAll {
+            assertThat(MDC.get(UristFieldNames.STATUS)).isEqualTo(response.status.toString())
+            assertThat(MDC.get(UristFieldNames.REQUEST_URI)).isEqualTo(request.requestURI)
+        }
     }
 
 }
