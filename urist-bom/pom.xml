@@ -12,6 +12,12 @@
         <dependencies>
             <dependency>
                 <groupId>org.dv.urist</groupId>
+                <artifactId>urist-spring</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.dv.urist</groupId>
                 <artifactId>urist-access-logger</artifactId>
                 <version>${project.version}</version>
             </dependency>
