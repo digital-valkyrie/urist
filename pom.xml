@@ -42,7 +42,7 @@
         <kotlin.version>1.4.32</kotlin.version>
 
         <!--Dependencies-->
-        <assertk.version>0.23.1</assertk.version>
+        <assertk.version>0.25</assertk.version>
         <spring-boot.version>2.4.5</spring-boot.version>
 
         <!--Maven-->
