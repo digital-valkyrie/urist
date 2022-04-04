@@ -43,7 +43,7 @@
 
         <!--Dependencies-->
         <assertk.version>0.23.1</assertk.version>
-        <spring-boot.version>2.4.5</spring-boot.version>
+        <spring-boot.version>2.5.12</spring-boot.version>
 
         <!--Maven-->
         <maven-surefire.version>2.22.2</maven-surefire.version>
