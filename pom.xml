@@ -47,7 +47,7 @@
 
         <!--Maven-->
         <maven-surefire.version>2.22.2</maven-surefire.version>
-        <maven-failsafe.version>2.22.1</maven-failsafe.version>
+        <maven-failsafe.version>3.2.5</maven-failsafe.version>
     </properties>
 
     <dependencyManagement>
